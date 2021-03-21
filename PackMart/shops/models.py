@@ -58,12 +58,14 @@ class Shop(models.Model):
     name = models.CharField(max_length=500)
     # From Choices
     business_type = models.CharField(max_length=10, choices=BUSINESS_CHOICES)
-    product_type = models.CharField(max_length=30, choices=PRODUCT_CHOICES, default=GENERAL)
-    service_type = models.CharField(max_length=30, choices=SERVICE_CHOICES, default=GENERAL)
+    product_type = models.CharField(max_length=30, choices=PRODUCT_CHOICES, null=True)
+    service_type = models.CharField(max_length=30, choices=SERVICE_CHOICES, null=True)
     description = models.CharField(max_length=512)
     # About Student Owner
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
-    owner_bio = models.CharField(max_length=512)
+    owner_bio = models.CharField(max_length=512, null=True)
+    logo = models.ImageField(null=True)
+    banner_image = models.ImageField(null=True)
     def __str__(self):
         return self.name
 
@@ -71,7 +73,9 @@ class Shop(models.Model):
 class Product(models.Model):
     shop = models.ForeignKey(Shop, on_delete=models.CASCADE)
     name = models.CharField(max_length=128)
+    description = models.CharField(max_length=512)
     price = models.IntegerField(default=0)
+    image = models.ImageField(null=True)
     def __str__(self):
         return self.name
 

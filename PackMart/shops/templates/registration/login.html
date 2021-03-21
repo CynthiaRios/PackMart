@@ -1,0 +1,33 @@
+{% include "sitebase.html"%}
+{% block content %}
+<br>
+<br>
+<br>
+<center>
+  <div class="card" style="width: 18rem; border-color:black; ; border-width:2px;">
+    <div class="card-body">
+      <h5 class="card-title">Login Form</h5>
+      <form action="" method="post">
+          {% csrf_token %}
+          <table>
+              <tr>
+                  <td style="padding-top:5px;"><label for="id_username">Enter username</label></td>
+              </tr>
+              <tr>
+                <td><input type="text" id="id_username" name="username" style="width: 100%"></td>
+              </tr>
+              <tr>
+                  <td style="padding-top:20px;"><label for="id_username">Enter password</label></td>
+              </tr>
+              <tr>
+                  <td><input type="password" id="id_password" name="password" style="width: 100%"></td>
+              </tr>
+              <tr>
+                  <td style="padding-top:20px;"><input class="btn btn-outline-danger" type="submit" value="Login" style="width: 100%; border-color:black;"></td>
+              </tr>
+          </table>
+      </form>
+    </div>
+  </div>
+</center>
+{% endblock %}

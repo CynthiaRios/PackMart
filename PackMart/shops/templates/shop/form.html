@@ -1,0 +1,43 @@
+{% include "sitebase.html"%}
+{% block content %}
+<style>
+  .card {
+        margin: 0 auto; /* Added */
+        float: none; /* Added */
+        margin-bottom: 10px; /* Added */
+   }
+   ul li {
+       list-style: none;
+       padding: 0;
+       -webkit-padding-start: 0;
+   }
+</style>
+<br>
+<br>
+  <div class="card" style="width: 50rem; border-color:black;">
+    <div class="card-body">
+      <h5 class="card-title"><center>New Business Form</center></h5>
+      <hr>
+      <form action="" method="post" class="form-group">
+          {% csrf_token %}
+          {{ form.non_field_errors }}
+          <div class = "row">
+            <div class="col">
+              <p>Name:<br> {{ form.name }}</p>
+              <p>{{ form.business_type.errors }}{{ form.business_type.label_tag }} {{ form.business_type }}</p>
+              <p>{{ form.description.errors }}{{ form.description.label_tag }}{{ form.description }}</p>
+              <!--<p>{{ form.logo.errors }}{{ form.logo.label_tag }}{{ form.logo}}</p>-->
+              <p>{{ form.banner_image.errors }}{{ form.banner_image.label_tag }}{{ form.banner_image}}</p>
+            </div>
+            <div class="col">
+              <p>{{ form.product_type.errors }}{{ form.product_type.label_tag }} {{ form.product_type }}</p>
+            </div>
+            <div class="col">
+              <p>{{ form.service_type.errors }}{{ form.service_type.label_tag }}{{ form.service_type }}</p>
+            </div>
+          </div>
+          <center><input type="submit" class="btn btn-danger" value="Save" /><center>
+      </form>
+    </div>
+  </div>
+{% endblock %}

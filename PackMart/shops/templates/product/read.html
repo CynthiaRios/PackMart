@@ -1,0 +1,19 @@
+{% include "sitebase.html"%}
+{% block content %}
+<!-- Page Content -->
+  <div class="container">
+
+    <!-- Jumbotron Header -->
+    <br>
+    <div class="row text-center">
+      <div class="col">
+          <img src="https://images2.imgbox.com/ff/95/mrqcS50p_o.jpg" style="width:500px;">
+      </div>
+      <div class="col">
+        <h1>{{product.name}}</h1>
+        <h2>${{product.price}}.00</h2>
+        <p>{{product.description}}</p>
+      </div>
+    </div>
+  </div>
+{% endblock %}

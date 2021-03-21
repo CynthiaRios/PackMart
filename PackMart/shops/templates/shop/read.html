@@ -1,0 +1,102 @@
+{% include "sitebase.html"%}
+{% block content %}
+<!-- Page Content -->
+  <div class="container">
+
+    <!-- Jumbotron Header -->
+    <header class="jumbotron my-4">
+      <h1 class="display-3">{{shop.name}}</h1>
+      <p class="lead">{{shop.description}}</p>
+      {% if shop.owner == request.user %}
+          <button data-toggle="modal" data-target="#edit_shop" class="btn btn-outline-danger">Edit Shop</button>
+          <button data-toggle="modal" data-target="#new_product" class="btn btn-outline-danger">Add Product</button>
+      {% endif %}
+    </header>
+    <!-- Page Features -->
+    <div class="row text-center">
+      {% for product in products %}
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="card h-100">
+          {% if product.image %}
+          <img class="card-img-top" src="https://images2.imgbox.com/ff/95/mrqcS50p_o.jpg"  alt="">
+          {% else %}
+          <img class="card-img-top" src="http://placehold.it/500x325" alt="">
+          {% endif %}
+          <div class="card-body">
+            <h4 class="card-title">{{ product.name }}</h4>
+            <p class="card-text">{{product.description}}</p>
+          </div>
+          <div class="card-footer">
+            <a href="{% url 'product_read' product.id %}" class="btn btn-outline-danger">View Product</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- New Product Modal -->
+    <div class="modal fade" id="new_product" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="new_product">Create Product</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form method="GET" action="">
+          <div class="modal-body">
+              <strong>Name</strong>
+              <input type="text" class="form-control" name="name" id="name" placeholder="Search...." style="width: 100%">
+              <br>
+              <strong>Price</strong>
+              <input type="number" class="form-control" name="price" id="price" style="width: 100%">
+              <br>
+              <strong>Description</strong>
+              <input type="text" class="form-control" name="description" id="description" style="width: 100%;">
+              <br>
+              <strong>Image</strong>
+              <input type="image" class="form-control" name="image" id="image" style="width: 100%">
+              <br>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <input class="btn btn-outline-danger" type="submit" class="btn btn-primary"></input>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div
+
+    <!-- Edit Shop Modal -->
+    <div class="modal fade" id="edit_shop" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="new_product">Edit Shop</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form method="POST" action="">
+          {% csrf_token %}
+          <div class="modal-body">
+              <strong>Name</strong>
+              <input type="text" class="form-control" name="name" id="name" placeholder="{{shop.name}}" style="width: 100%">
+              <br>
+              <strong>Description</strong>
+              <input type="text" class="form-control" name="description" id="description" placeholder="{{shop.description}}" style="width: 100%;">
+              <br>
+              <strong>Image</strong>
+              <input type="image" class="form-control" name="image" id="image" style="width: 100%">
+              <br>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <input class="btn btn-outline-danger" type="submit" class="btn btn-primary"></input>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+{% endblock %}

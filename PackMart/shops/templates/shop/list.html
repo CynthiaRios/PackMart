@@ -1,0 +1,29 @@
+{% include "sitebase.html"%}
+{% block content %}
+
+<div class="container">
+  <br>
+  <h1 class="display-3">Shops</h1>
+  <a href="{% url 'shop_create' %}" class="btn btn-outline-danger">New Shop</a>
+  <hr>
+  <div class="row">
+    {% for shop in shops %}
+        <div class="col-lg-3 col-md-6 mb-4">
+            <div class="card h-100">
+              {% if shop.logo%}
+                <img class="card-img-top" src="https://images2.imgbox.com/ff/95/mrqcS50p_o.jpg">
+              {% else %}
+                <img class="card-img-top" src="{{shop.logo}}">
+              {% endif %}
+              <div class="card-body">
+                <h4 class="card-title">{{shop.name}}</h4>
+                <p class="card-text">{{shop.description}}</p>
+              </div>
+              <div class="card-footer">
+                <a href="{% url 'shop_read' shop.id %}" class="btn btn-outline-danger">View Shop Page</a>
+              </div>
+            </div>
+          </div>
+    {% endfor %}
+</div>
+{% endblock %}
